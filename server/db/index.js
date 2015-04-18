@@ -15,3 +15,5 @@ connection.connect(function(err) {
   if (err) throw err;
   console.log('MySQL Database is running..');
 });
+
+module.exports = connection;
