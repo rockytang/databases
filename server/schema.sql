@@ -3,6 +3,9 @@ CREATE DATABASE chat;
 USE chat;
 
 CREATE TABLE messages (
+  username VARCHAR(50),
+  message VARCHAR(300),
+  roomname VARCHAR(50)
   /* Describe your table here.*/
 );
 

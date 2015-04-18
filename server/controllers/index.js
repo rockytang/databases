@@ -5,7 +5,10 @@ var bluebird = require('bluebird');
 
 module.exports = {
   messages: {
-    get: function (req, res) {}, // a function which handles a get request for all messages
+    // curl -X GET http://localhost:3000/classes
+    get: function (req, res) {
+      console.log("testing ", req.method)
+    }, // a function which handles a get request for all messages
     post: function (req, res) {} // a function which handles posting a message to the database
   },
 
