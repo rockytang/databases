@@ -12,8 +12,9 @@ module.exports = {
     }, // a function which handles a get request for all messages
     // curl -X POST http://localhost:3000/classes/messages --data "{ username: 'Valjean' }"
     post: function (req, res) { // a function which handles posting a message to the database
-      console.log('POST controllers messages');
-      models.messages.post(res, req.body);
+      // console.log('POST controllers messages', req.body);
+      models.messages.post(req, res, req.body);
+
     }
   },
 
@@ -21,8 +22,8 @@ module.exports = {
     // Ditto as above
     get: function (req, res) {},
     post: function (req, res) {
-      console.log('POST controllers users');
-      models.users.post(res, req.body);
+      // console.log('POST controllers users', req.body);
+      models.users.post(req, res, req.body);
     }
   }
 };

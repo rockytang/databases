@@ -9,6 +9,11 @@ CREATE TABLE messages (
   /* Describe your table here.*/
 );
 
+CREATE TABLE users (
+  username VARCHAR(50)
+  /* Describe your table here.*/
+);
+
 /* Create other tables and define schemas for them here! */
 
 

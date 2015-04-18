@@ -10,8 +10,7 @@ for (var route in controllers) {
   // when ..localhost:3000/classes
   router.route("/" + route)
     // route to ../messages or ../users
-    .get(controllers[route].get)
-    .post(controllers[route].post);
+    .get(controllers[route].get).post(controllers[route].post);
 }
 // export the route to app.js
 module.exports = router;
