@@ -5,7 +5,20 @@ var db = require('../db');
 
 module.exports = {
   messages: {
-    get: function () {}, // a function which produces all the messages
+    get: function (req, res) {
+      console.log('GET messages on server');
+      var query = "SELECT * FROM messages ";
+
+      db.query(query, function(err, result){
+        if (err) {
+          console.log(err);
+        }
+        res.writeHeader(200);
+        console.log('result', result);
+        res.end(JSON.stringify(result));
+      });
+
+    }, // a function which produces all the messages
     post: function (req, res, data) {
 
       var input = JSON.parse(JSON.stringify(req.body));
@@ -37,7 +50,10 @@ module.exports = {
 
   users: {
     // Ditto as above.
-    get: function () {},
+    get: function (req, res) {
+      console.log('GET users on server');
+
+    },
     post: function (req, res, data) {
       // console.log('data:',typeof data);
       var input = JSON.parse(JSON.stringify(req.body));

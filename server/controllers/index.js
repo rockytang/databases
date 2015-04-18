@@ -7,7 +7,7 @@ module.exports = {
   messages: {
     // curl -X GET http://localhost:3000/classes/messages
     get: function (req, res) {
-      console.log("testing ", req.method);
+      models.messages.get(req, res);
 
     }, // a function which handles a get request for all messages
     // curl -X POST http://localhost:3000/classes/messages --data "{ username: 'Valjean' }"
