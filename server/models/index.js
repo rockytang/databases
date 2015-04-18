@@ -15,7 +15,9 @@ module.exports = {
         }
         res.writeHeader(200);
         console.log('result', result);
-        res.end(JSON.stringify(result));
+
+        resultObj = {results: result};
+        res.end(JSON.stringify(resultObj));
       });
 
     }, // a function which produces all the messages

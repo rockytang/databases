@@ -5,7 +5,7 @@ $(function() {
   app = {
 //TODO: The current 'addFriend' function just adds the class 'friend'
 //to all messages sent by the user
-    server: 'https://api.parse.com/1/classes/chatterbox/',
+    server: 'http://127.0.0.1:3000/classes/messages',
     username: 'anonymous',
     roomname: 'lobby',
     lastMessageId: 0,
@@ -63,7 +63,8 @@ $(function() {
         data: { order: '-createdAt'},
         success: function(data) {
           console.log('chatterbox: Messages fetched');
-
+          // console.dir(JSON.parse(data));
+          data = JSON.parse(data);
           // Don't bother if we have nothing to work with
           if (!data.results || !data.results.length) { return; }
 
@@ -72,7 +73,7 @@ $(function() {
           var displayedRoom = $('.chat span').first().data('roomname');
           app.stopSpinner();
           // Only bother updating the DOM if we have a new message
-          if (mostRecentMessage.objectId !== app.lastMessageId || app.roomname !== displayedRoom) {
+          // if (mostRecentMessage.objectId !== app.lastMessageId || app.roomname !== displayedRoom) {
             // Update the UI with the fetched rooms
             app.populateRooms(data.results);
 
@@ -81,7 +82,7 @@ $(function() {
 
             // Store the ID of the most recent message
             app.lastMessageId = mostRecentMessage.objectId;
-          }
+          // }
         },
         error: function(data) {
           console.error('chatterbox: Failed to fetch messages');
@@ -93,7 +94,7 @@ $(function() {
     },
     populateMessages: function(results, animate) {
       // Clear existing messages
-
+      // console.log('POPULATE MESSAGES');
       app.clearMessages();
       app.stopSpinner();
       if (Array.isArray(results)) {
@@ -113,6 +114,7 @@ $(function() {
       }
     },
     populateRooms: function(results) {
+      // console.log('POPULATE ROOMS');
       app.$roomSelect.html('<option value="__newRoom">New room...</option><option value="" selected>Lobby</option></select>');
 
       if (results) {
@@ -140,6 +142,7 @@ $(function() {
       app.$roomSelect.append($option);
     },
     addMessage: function(data) {
+      console.log('ADD MESSAGE:', data);
       if (!data.roomname)
         data.roomname = 'lobby';
 
@@ -158,7 +161,7 @@ $(function() {
           $username.addClass('friend');
 
         var $message = $('<br><span/>');
-        $message.text(data.text).appendTo($chat);
+        $message.text(data.message).appendTo($chat);
 
         // Add the message to the UI
         app.$chats.append($chat);
@@ -210,11 +213,12 @@ $(function() {
     },
     handleSubmit: function(evt) {
       var message = {
-        username: app.username,
-        text: app.$message.val(),
+        username: 'anonymous',
+        message: app.$message.val(),
         roomname: app.roomname || 'lobby'
       };
-
+      console.log('HANDLE SUBMIT');
+      console.dir(message);
       app.send(message);
 
       // Stop the form from submitting
